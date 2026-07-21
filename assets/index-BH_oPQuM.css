@@ -1,0 +1,1 @@
+.controls{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:400px}label{display:flex;flex-direction:column;gap:4px}input{width:100%;padding:6px 10px;border-radius:4px;border:1px solid #ccc}.Carousel{overflow:hidden}.Carousel__list{display:flex;padding:0;margin:0;list-style:none}.Carousel li{flex-shrink:0}
