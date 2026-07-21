@@ -3,10 +3,16 @@ import './App.scss';
 import Carousel from './components/Carousel';
 
 interface State {
-  images: string[];
+  images: string[],
+  itemWidth: number;
+  frameSize: number;
+  step: number;
+  animationDuration: number;
+  infinite: boolean;
 }
 
 class App extends React.Component<{}, State> {
+
   state = {
     images: [
       './img/1.png',
@@ -20,17 +26,53 @@ class App extends React.Component<{}, State> {
       './img/9.png',
       './img/10.png',
     ],
+    step: 3,
+    frameSize: 3,
+    itemWidth: 130,
+    animationDuration: 1000,
+    infinite: false,
   };
 
   render() {
-    const { images } = this.state;
+    const { images, step, frameSize, itemWidth, animationDuration, infinite } = this.state;
 
     return (
       <div className="App">
-        {/* eslint-disable-next-line */}
-        <h1>Carousel with {images.length} images</h1>
+        <h1 data-cy="title">Carousel with {images.length} images</h1>
+        <div className="controls">
+          <label htmlFor="stepId">Step: </label>
 
-        <Carousel />
+          <input
+            id='stepId'
+            type="text"
+            value={step}
+            onChange={(e) => this.setState({step: +e.target.value || 0})}
+          />
+
+          <label htmlFor="itemId">Item Size:</label>
+          
+          <input
+            type="text"
+            value={itemWidth}
+            onChange={(e) => this.setState({itemWidth: +e.target.value || 0})}
+            id="itemId" />
+          
+          <label htmlFor="frameId">Frame Size:</label>
+          <input
+            type="text"
+            value={frameSize}
+            onChange={(e) => this.setState({frameSize: +e.target.value || 0})}
+            id="frameId" />
+        </div>
+
+        <Carousel
+          images={images}
+          step={step}
+          frameSize={frameSize}
+          itemWidth={itemWidth}
+          animationDuration={animationDuration}
+          infinite={infinite}
+        />
       </div>
     );
   }
